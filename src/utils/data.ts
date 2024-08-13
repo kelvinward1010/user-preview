@@ -6,6 +6,7 @@ export function mapData(data: any[]): IUser[] {
         title: user.name.title,
         first: user.name.first,
         last: user.name.last,
+        fullname: `${user.name.title}. ${user.name.first} ${user.name.last}`,
         username: `${user.name.first} ${user.name.last}`,
     }));
 

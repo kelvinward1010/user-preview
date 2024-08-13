@@ -6,7 +6,14 @@ import { useSearchParams } from "react-router-dom";
 export function Home() {
     const [pageParams, __] = useSearchParams();
     const keysSearchOnParams = Number(pageParams.get("pageNumber"));
-    const titleInTable = ["Title", "First", "Last", "Username", "Actions"];
+    const titleInTable = [
+        "Title",
+        "First",
+        "Last",
+        "Fullname",
+        "Username",
+        "Actions",
+    ];
 
     const { data, isLoading } = useGetUsersOptions({
         params: {
