@@ -18,7 +18,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 }) => {
     const [pageParams, setPageParams] = useSearchParams();
     const totalPages = Math.ceil(100 / 10);
-    const keysPgaes = Number(pageParams.get("pageNumber"));
+    const keysPages = Number(pageParams.get("pageNumber"));
 
     const goToPage = (page: number) => {
         let currentPage = Math.max(1, Math.min(page, totalPages));
@@ -28,17 +28,32 @@ export const Pagination: React.FC<PaginationProps> = ({
 
     const renderPageNumbers = () => {
         const pageNumbers = [];
-        for (let i = 1; i <= totalPages; i++) {
+        const maxPagesToShow = 5;
+        const startPage = Math.max(
+            1,
+            keysPages - Math.floor(maxPagesToShow / 2),
+        );
+        const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+        for (let i = startPage; i <= endPage; i++) {
             pageNumbers.push(
                 <button
                     key={i}
                     onClick={() => goToPage(i)}
-                    className={`px-1 py-1 rounded border border-teal-600 ${keysPgaes === i ? "text-teal-50 bg-teal-600 " : "text-black"}`}
+                    className={`px-1 py-1 rounded border border-teal-600 ${keysPages === i ? "text-teal-50 bg-teal-600 " : "text-black"}`}
                 >
                     {i}
                 </button>,
             );
         }
+
+        if (startPage > 1) {
+            pageNumbers.unshift(<span key="start-ellipsis">...</span>);
+        }
+        if (endPage < totalPages) {
+            pageNumbers.push(<span key="end-ellipsis">...</span>);
+        }
+
         return pageNumbers;
     };
 
@@ -57,18 +72,20 @@ export const Pagination: React.FC<PaginationProps> = ({
             <ListPost data={draftData} />
             <div className="flex justify-center gap-2 items-center mt-2">
                 <Button
-                    onClick={() => goToPage(keysPgaes - 1)}
+                    onClick={() => goToPage(keysPages - 1)}
                     className="cursor-pointer"
-                    disabled={keysPgaes === totalPages}
+                    disabled={keysPages === 1}
                     lable="Previous"
                 />
                 {renderPageNumbers()}
                 <Button
-                    onClick={() => goToPage(keysPgaes + 1)}
+                    onClick={() => goToPage(keysPages + 1)}
                     className="cursor-pointer"
-                    disabled={keysPgaes === totalPages}
+                    disabled={keysPages === totalPages}
                     lable="Next"
                 />
+                ||
+                <h4>Pages: {keysPages}/10</h4>
             </div>
         </div>
     );
