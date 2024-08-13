@@ -4,3 +4,5 @@
 2. cd user-preview
 3. npm install
 4. npm run dev
+
+### Link to deploy this project online: https://user-preview.vercel.app/
