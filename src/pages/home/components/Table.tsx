@@ -1,8 +1,11 @@
+import { IUser } from "@/types/user";
+
 interface TableProps {
     title: string[];
+    data: IUser[];
 }
 
-function Table({ title }: TableProps) {
+function Table({ title, data }: TableProps) {
     return (
         <div className="w-screen h-full flex justify-center mt-9">
             <table className="px-1">
@@ -19,13 +22,25 @@ function Table({ title }: TableProps) {
                     </tr>
                 </thead>
                 <tbody className="tablebodymain">
-                    <tr className="border border-teal-600 text-left">
-                        <td className="border border-teal-600 px-1">Mr.</td>
-                        <td className="border border-teal-600 px-1">
-                            John Doe
-                        </td>
-                        <td className="border border-teal-600 px-1">Male</td>
-                    </tr>
+                    {data?.map((user: IUser, idx) => (
+                        <tr
+                            key={idx}
+                            className="border border-teal-600 text-left"
+                        >
+                            <td className="border w-auto border-teal-600 px-1">
+                                {user?.title}
+                            </td>
+                            <td className="border w-auto border-teal-600 px-1">
+                                {user?.first}
+                            </td>
+                            <td className="border w-auto border-teal-600 px-1">
+                                {user?.last}
+                            </td>
+                            <td className="border w-auto border-teal-600 px-1">
+                                {user?.username}
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
