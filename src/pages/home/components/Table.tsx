@@ -109,6 +109,14 @@ function Table({ title, data }: TableProps) {
                             <td className="border w-auto border-teal-600 px-1">
                                 {user?.username}
                             </td>
+                            <td className="flex justify-center border w-auto border-teal-600 p-1">
+                                <img
+                                    src={user.thumbnail}
+                                    alt="img-icon"
+                                    width={50}
+                                    height={50}
+                                />
+                            </td>
                         </tr>
                     ))}
                 </tbody>

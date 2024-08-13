@@ -12,7 +12,7 @@ export function Home() {
         "Last",
         "Fullname",
         "Username",
-        "Actions",
+        "Thumbnail",
     ];
 
     const { data, isLoading } = useGetUsersOptions({

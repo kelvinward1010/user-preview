@@ -5,6 +5,7 @@ export interface IUser {
     last: string;
     fullname: string;
     username: string;
+    thumbnail: string;
 }
 
 export interface IBasetListUser {
