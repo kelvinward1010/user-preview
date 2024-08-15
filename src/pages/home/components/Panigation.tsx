@@ -18,7 +18,10 @@ export const Pagination: React.FC<PaginationProps> = ({
 }) => {
     const [pageParams, setPageParams] = useSearchParams();
     const totalPages = Math.ceil(100 / 10);
-    const keysPages = Number(pageParams.get("pageNumber"));
+    const keysPages =
+        Number(pageParams.get("pageNumber")) === 0
+            ? 1
+            : Number(pageParams.get("pageNumber"));
 
     const goToPage = (page: number) => {
         let currentPage = Math.max(1, Math.min(page, totalPages));
